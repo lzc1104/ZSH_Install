@@ -10,6 +10,19 @@ function Coloseselinux() {
 setenforce 0 >/dev/null 2>&1
 }
 
+# 安装常用依赖
+function InstallDependency() {
+   yum -y install wget zip unzip curl
+}
+
+# 安装oh-my-zsh 插件
+function InstallOMSPlugins() {
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+  sed -i "s/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/" ~/.zshrc
+  source ~/.zshrc
+}
+
 #设置时区并同步时间
 function Settimezone() {
   echo "${CSUCCESS}[INFO] ${CBLUE}安装ntpdate${CEND}"
@@ -41,8 +54,12 @@ function InstallSF() {
   cp -r ./include/logo.sh /etc/profile.d/
 }
 
+
+
+InstallDependency
 Coloseselinux
 Settimezone
 InstallSF
 InstallZSH
 InstallOMS
+InstallOMSPlugins
