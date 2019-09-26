@@ -10,4 +10,4 @@ function InstallOMSPlugins() {
   source ~/.zshrc
 }
 
-InstallOMSPlugins()
+InstallOMSPlugins
