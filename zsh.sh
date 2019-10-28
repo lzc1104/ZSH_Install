@@ -1,7 +1,6 @@
 #!/bin/bash
 
 . ./include/color.sh # 设置颜色
-. ./include/memory.sh # 增加虚拟内存
 
 #关闭selinux
 function Coloseselinux() {
